@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { NextUIProvider } from "@nextui-org/react";
+import { NextUIProvider, ScrollShadow } from "@nextui-org/react";
 import Header from "@/components/Header";
 import { RightSideBar } from "@/components/RightSideBar";
 
@@ -35,7 +35,10 @@ export default function RootLayout({
           <div className="flex flex-col min-h-screen bg-background text-foreground">
             <Header />
             <main className="flex-1 mx-auto md:mx-0 w-full max-w-screen-sm md:max-w-none px-4 md:px-8">
+              <ScrollShadow  hideScrollBar className=" h-[810px]">
+
               {children}
+              </ScrollShadow>
             </main>
             <RightSideBar />
           </div>

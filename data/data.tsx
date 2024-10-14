@@ -64,6 +64,10 @@ interface ContactLink {
 interface Services {
   text: string;
 }
+interface FAQItem {
+  question: string;
+  answer: string;
+}
 
 export const data = {
   personalInfo: {
@@ -126,6 +130,24 @@ export const data = {
       icon: <Mail />,
     },
   ] as NavLink[],
+  faqData:   [
+    {
+      question: "Can you work with clients remotely?",
+      answer: "Yes, I have extensive experience working with clients remotely using various collaboration tools and communication platforms."
+    },
+    {
+      question: "How long does it typically take to complete a web design project?",
+      answer: "The timeline for a web design project can vary depending on its complexity and scope. Typically, a basic website might take 2-4 weeks, while more complex projects could take 2-3 months or more."
+    },
+    {
+      question: "Do you offer website maintenance services?",
+      answer: "Yes, I offer website maintenance services to ensure your site remains up-to-date, secure, and performs optimally."
+    },
+    {
+      question: "Can you optimize my website for search engines?",
+      answer: "I implement SEO best practices in all web projects to improve visibility and ranking in search engine results."
+    }
+  ] as FAQItem[],
 
   skills: [
     {

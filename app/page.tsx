@@ -10,9 +10,9 @@ import { User } from "@nextui-org/user";
 import { AnimatedDot } from "@/components/ui/AnimatedDot";
 import { FadeInSection } from "@/components/ui/ScrollAnimation";
 import Footer from "@/components/Footer";
-import Counter from "@/components/ui/Counter"; // Import the Counter component
+import Counter from "@/components/ui/Counter";
+import { Accordion, AccordionItem } from "@nextui-org/react";
 
-// Type for the stats data
 interface Stat {
   number: number;
   label: string;
@@ -30,7 +30,7 @@ export default function HomePage() {
     if (servicesList) {
       servicesList.style.animation = "none";
       // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      servicesList.offsetHeight; // Trigger reflow
+      servicesList.offsetHeight;
       servicesList.style.animation = "";
     }
   }, []);
@@ -173,6 +173,39 @@ export default function HomePage() {
             </CardBody>
           </Card>
         </div>
+      </FadeInSection>
+      <FadeInSection>
+      <div className="flex flex-col md:flex-row gap-8 p-4 md:p-8 ">
+      <Card className="w-full md:w-1/3 bg-gray-800">
+        <CardHeader className="flex-col items-start">
+          <div className="rounded-full bg-gray-700 p-4 mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+            </svg>
+          </div>
+          <h2 className="text-2xl font-bold mb-2">Ask a Question</h2>
+          <p className="text-gray-400 mb-4">Here&apos;s what some of my satisfied clients have to say about my work</p>
+        </CardHeader>
+        <CardBody>
+          <Button color="danger" variant="shadow" className="w-full">
+            Ask a Question
+          </Button>
+        </CardBody>
+      </Card>
+      
+      <div className="w-full md:w-2/3">
+        <h1 className="text-4xl font-bold mb-2">Frequently Asked Question</h1>
+        <p className="text-gray-400 mb-8">If your question isn&apos;t addressed here, feel free to reach out—I&apos;m always ready to provide further assistance</p>
+        
+        <Accordion variant="shadow">
+          {data.faqData.map((item, index) => (
+            <AccordionItem key={index} aria-label={item.question} title={item.question}>
+              {item.answer}
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+    </div>
       </FadeInSection>
       <Footer />
     </div>
