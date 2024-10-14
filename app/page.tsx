@@ -10,30 +10,44 @@ import { User } from "@nextui-org/user";
 import { AnimatedDot } from "@/components/ui/AnimatedDot";
 import { FadeInSection } from "@/components/ui/ScrollAnimation";
 import Footer from "@/components/Footer";
+import Counter from "@/components/ui/Counter"; // Import the Counter component
+
+// Type for the stats data
+interface Stat {
+  number: number;
+  label: string;
+}
 
 export default function HomePage() {
-  const servicesRef = useRef<HTMLDivElement>(null);
+  const servicesRef = useRef<HTMLDivElement | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [showAllSkills, setShowAllSkills] = useState<boolean>(false);
+
+  const VISIBLE_SKILLS = 6;
 
   useEffect(() => {
     const servicesList = servicesRef.current;
     if (servicesList) {
       servicesList.style.animation = "none";
       // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      servicesList.offsetHeight;
+      servicesList.offsetHeight; // Trigger reflow
       servicesList.style.animation = "";
     }
   }, []);
 
-  const stats = [
-    { number: data.projects.length.toString(), label: "Completed Projects" },
-    { number: data.skills.length.toString(), label: "Skills Mastered" },
+  const stats: Stat[] = [
+    { number: data.projects.length, label: "Completed Projects" },
+    { number: data.skills.length, label: "Skills Mastered" },
     {
-      number: (new Date().getFullYear() - parseInt(data.resume.education[0].year)).toString(),
+      number: new Date().getFullYear() - parseInt(data.resume.education[0].year, 10),
       label: "Years of Experience",
     },
-    { number: data.contactLinks.length.toString(), label: "Ways to Connect" },
+    { number: data.contactLinks.length, label: "Ways to Connect" },
   ];
+
+  const visibleSkills = showAllSkills
+    ? data.skills
+    : data.skills.slice(0, VISIBLE_SKILLS);
 
   return (
     <div className="flex-1 p-4 md:p-8 overflow-hidden max-w-full md:max-w-[calc(100%-36rem)] mx-auto">
@@ -106,8 +120,7 @@ export default function HomePage() {
               {stats.map((stat, index) => (
                 <div key={index} className="text-center">
                   <p className="text-4xl font-bold mb-2">
-                    {stat.number}
-                    <span className="text-primary">+</span>
+                    <Counter end={stat.number} duration={1000} />
                   </p>
                   <p className="text-sm text-default-500">{stat.label}</p>
                 </div>
@@ -121,12 +134,12 @@ export default function HomePage() {
         <div className="relative">
           <Card className="mb-12 cursor-pointer bg-background">
             <CardHeader>
-              <h2 className="text-2xl md:text-3xl font-bold">Skills</h2>
+              <h2 className="text-2xl md:text-3xl font-bold">Skills & Expertise</h2>
             </CardHeader>
             <Divider />
             <CardBody>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 relative">
-                {data.skills.map((skill, index) => (
+                {visibleSkills.map((skill, index) => (
                   <div
                     key={index}
                     className="relative flex items-center justify-center w-full p-4 rounded-lg overflow-hidden transition-all duration-300 ease-in-out group"
@@ -146,6 +159,17 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
+
+              {data.skills.length > VISIBLE_SKILLS && (
+                <div className="flex justify-center mt-4">
+                  <Button
+                    variant="ghost"
+                    onClick={() => setShowAllSkills((prev) => !prev)}
+                  >
+                    {showAllSkills ? "Show Less" : "Show More"}
+                  </Button>
+                </div>
+              )}
             </CardBody>
           </Card>
         </div>

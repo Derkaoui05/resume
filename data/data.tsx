@@ -3,13 +3,16 @@ import {
   Info,
   Briefcase,
   Mail,
-  Code,
   Layout,
   Server,
   Smartphone,
   Database,
-  TestTube,
   Cloud,
+  Paintbrush,
+  GitBranch,
+  Package,
+  CheckCircle,
+  Code2,
 } from "lucide-react";
 
 interface Project {
@@ -126,46 +129,64 @@ export const data = {
 
   skills: [
     {
-      icon: <Code className="w-6 h-6 mb-2" />,
+      icon: <Code2 className="w-6 h-6 mb-2" />,
       title: "Programming Languages",
       description:
-        "I'm well-versed in a variety of programming languages, including /JavaScript, TypeScript, Python.",
+        "I am proficient in JavaScript, TypeScript, and Python, which I use to develop both frontend and backend applications. These languages allow me to build scalable, maintainable, and efficient software solutions.",
     },
     {
       icon: <Layout className="w-6 h-6 mb-2" />,
-      title: "Frontend",
+      title: "Frontend Development",
       description:
-        "My expertise in frontend development spans across a range of frameworks and technologies, such as React, JavaScript, TypeScript, Next.js, Three.js. I'm committed to creating seamless user experiences.",
+        "I specialize in React, Next.js, TypeScript, and Three.js, creating seamless user experiences with modern, interactive, and responsive interfaces. My focus is on performance and smooth design, ensuring exceptional web interactions.",
     },
     {
       icon: <Server className="w-6 h-6 mb-2" />,
       title: "Backend",
       description:
-        "I have a strong foundation in backend development, with proficiency in Node.js, Laravel, PHP.",
+        "With experience in Node.js, Laravel, and PHP, I develop reliable backend systems and APIs (RESTful & GraphQL) that integrate smoothly with frontend applications, ensuring efficient data exchange and robust logic implementation.",
     },
     {
       icon: <Smartphone className="w-6 h-6 mb-2" />,
       title: "Mobile",
       description:
-        "My skills extend to mobile development, particularly in React Native and Android app development using Kotlin.",
+        "I build cross-platform mobile apps using React Native and develop native Android applications with Kotlin. My goal is to provide smooth and consistent user experiences across devices, ensuring performance and usability.",
     },
     {
       icon: <Database className="w-6 h-6 mb-2" />,
       title: "Databases",
       description:
-        "I'm well-versed in working with databases like Mariadb, MySQL, MongoDB, PostgreSQL, and Sqlite, enabling me to build robust and efficient data-driven applications.",
+        "I work with various databases, including MariaDB, MySQL, MongoDB, PostgreSQL, and SQLite, to design efficient data structures that enable seamless data access and storage for complex applications.",
     },
     {
-      icon: <TestTube className="w-6 h-6 mb-2" />,
+      icon: <CheckCircle className="w-6 h-6 mb-2" />,
       title: "Testing Tools",
       description:
-        "I use a range of testing tools, including Jest for testing React applications, Mocha for Node.js backend testing, to ensure the reliability of the software I develop.",
+        "I ensure code quality using Jest for frontend testing and Mocha for backend tests. I also use Cypress for end-to-end testing, guaranteeing smooth interactions across the entire application.",
+    },
+    {
+      icon: <Package className="w-6 h-6 mb-2" />,
+      title: "DevOps and Microservices",
+      description:
+        "I implement DevOps practices using Docker and Docker Compose to manage deployments efficiently. I specialize in building microservices with Node.js and handling asynchronous processes with RabbitMQ.",
     },
     {
       icon: <Cloud className="w-6 h-6 mb-2" />,
-      title: "DevOps and Microservices",
+      title: "Cloud & Hosting Platforms",
       description:
-        "I have experience with DevOps practices, including Docker and Docker Compose, and I specialize in building microservices with Node.js. I also have familiarity with message queuing systems like RabbitMQ.",
+        "I deploy applications on Vercel, Netlify, and AWS, ensuring they are fast, secure, and scalable. My experience with CI/CD pipelines allows me to deliver updates seamlessly and efficiently.",
+    },
+    {
+      icon: <GitBranch className="w-6 h-6 mb-2" />,
+      title: "Version Control & Collaboration Tools",
+      description:
+        "I use Git for version control and collaborate on projects via GitHub and GitLab. My experience in Agile environments ensures I stay organized and productive during development sprints.",
+    },
+    {
+      icon: <Paintbrush className="w-6 h-6 mb-2" />,
+      title: "UI/UX Tools",
+      description:
+        "I design and style interfaces using Tailwind CSS and Material UI. With Framer, I prototype and ensure that every design aligns with modern standards, providing users with visually appealing and consistent experiences.",
     },
   ] as Skills[],
 
