@@ -17,6 +17,7 @@ export default function HomePage() {
     const servicesList = servicesRef.current;
     if (servicesList) {
       servicesList.style.animation = "none";
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       servicesList.offsetHeight; // Assign to avoid the warning
       servicesList.style.animation = "";
     }
