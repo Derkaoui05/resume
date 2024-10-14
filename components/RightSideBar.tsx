@@ -8,7 +8,7 @@ import Link from "next/link";
 export const RightSideBar: FC = () => {
   return (
     <>
-      <div className="hidden md:flex flex-col items-center justify-center text-white shadow-md shadow-content1 rounded-l-lg p-4 fixed right-0 top-0 w-72 h-full">
+      <div className="hidden md:flex flex-col items-center justify-center text-white shadow-primary-800 shadow-sm rounded-tl-3xl p-4 fixed right-0 top-0 w-72 h-full">
         <div className="space-y-8">
           {data.contactLinks.map((link) => (
             <Link

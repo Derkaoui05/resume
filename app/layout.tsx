@@ -36,7 +36,6 @@ export default function RootLayout({
             <Header />
             <main className="flex-1 mx-auto md:mx-0 w-full max-w-screen-sm md:max-w-none px-4 md:px-8">
               <ScrollShadow  hideScrollBar className=" h-[810px]">
-
               {children}
               </ScrollShadow>
             </main>

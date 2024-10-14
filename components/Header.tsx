@@ -22,7 +22,7 @@ const Header: FC = () => {
   return (
     <>
       {/* Desktop Mode */}
-      <div className="hidden md:flex flex-col w-72 bg-background h-screen shadow-md shadow-content1 rounded-tr-lg text-white fixed p-8">
+      <div className="hidden md:flex flex-col w-72 bg-background h-screen shadow-primary-800 shadow-sm rounded-tr-3xl text-white fixed p-8">
         <div className="mb-6">
           <h1 className="text-2xl font-bold">{data.personalInfo.name}</h1>
           <p className="text-gray-400">{data.personalInfo.role}</p>
@@ -36,7 +36,7 @@ const Header: FC = () => {
                 key={item.id}
                 as={Link}
                 href={item.path}
-                className={`flex items-center p-2 rounded-lg hover:bg-gray-200 hover:text-background transition-colors ${
+                className={`flex items-center p-2 rounded-lg cursor-pointer hover:bg-gray-200 hover:text-background transition-colors ${
                   pathname === item.path
                     ? "bg-gray-200 text-background"
                     : "text-foreground"
