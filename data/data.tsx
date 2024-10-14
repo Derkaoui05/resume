@@ -54,7 +54,7 @@ export const data = {
     personalInfo: {
         name: "Derkaoui Yassir",
         role: "Junior Developer",
-        bio: "Passionate about web development, working with Next.js and React.",
+        bio: "I'm a passionate web developer with expertise in React, Next.js, and TypeScript. With a keen eye for design and a love for clean code, I create engaging and performant web applications that deliver exceptional user experiences.",
         location: "Morocco",
     } as PersonalInfo,
 

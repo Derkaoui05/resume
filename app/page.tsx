@@ -65,7 +65,7 @@ export default function HomePage() {
                   className="mb-4"
                 />
                 <p className="mb-4">{data.personalInfo.bio}</p>
-                <Button color="primary">Learn More</Button>
+                <Button variant="ghost">Learn More</Button>
               </div>
             </div>
           </CardBody>
@@ -73,7 +73,7 @@ export default function HomePage() {
       </FadeInSection>
 
       <FadeInSection>
-        <Card className="mb-12 bg-background overflow-hidden">
+        <Card className=" bg-background overflow-hidden">
           <Divider />
           <CardBody className="p-0">
             <div className="relative flex overflow-x-hidden bg-content1">
