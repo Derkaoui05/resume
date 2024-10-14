@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import { data } from "@/data/data";
 import { Image } from "@nextui-org/image";
 import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
@@ -9,15 +11,34 @@ import { AnimatedDot } from "@/components/ui/AnimatedDot";
 import { FadeInSection } from "@/components/ui/ScrollAnimation";
 
 export default function HomePage() {
+  const servicesRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const servicesList = servicesRef.current;
+    if (servicesList) {
+      servicesList.style.animation = "none";
+      servicesList.offsetHeight; // Assign to avoid the warning
+      servicesList.style.animation = "";
+    }
+  }, []);
+
+  const stats = [
+    { number: data.projects.length.toString(), label: "Completed Projects" },
+    { number: data.skills.length.toString(), label: "Skills Mastered" },
+    {
+      number: (new Date().getFullYear() - parseInt(data.resume.education[0].year)).toString(),
+      label: "Years of Experience",
+    },
+    { number: data.contactLinks.length.toString(), label: "Ways to Connect" },
+  ];
+
   return (
     <div className="flex-1 p-4 md:p-8 overflow-hidden max-w-full md:max-w-[calc(100%-36rem)] mx-auto">
       <FadeInSection>
         <Card className="mb-8">
           <CardBody className="flex flex-row items-center justify-center md:justify-start">
             <AnimatedDot />
-            <h2 className="text-xl md:text-2xl font-bold ml-2">
-              Available to work
-            </h2>
+            <h2 className="text-xl md:text-2xl font-bold ml-2">Available to work</h2>
           </CardBody>
         </Card>
       </FadeInSection>
@@ -38,19 +59,12 @@ export default function HomePage() {
               </div>
               <div className="w-full space-y-5 md:w-1/2">
                 <User
-                  name="Derkaoui Yassir"
-                  description="Web Developer"
-                  avatarProps={{
-                    src: "/about.png",
-                  }}
+                  name={data.personalInfo.name}
+                  description={data.personalInfo.role}
+                  avatarProps={{ src: "/about.png" }}
                   className="mb-4"
                 />
-                <p className="mb-4">
-                  I&apos;m a passionate web developer with expertise in React, Next.js,
-                  and TypeScript. With a keen eye for design and a love for clean
-                  code, I create engaging and performant web applications that
-                  deliver exceptional user experiences.
-                </p>
+                <p className="mb-4">{data.personalInfo.bio}</p>
                 <Button color="primary">Learn More</Button>
               </div>
             </div>
@@ -59,31 +73,42 @@ export default function HomePage() {
       </FadeInSection>
 
       <FadeInSection>
+        <Card className="mb-12 bg-background overflow-hidden">
+          <Divider />
+          <CardBody className="p-0">
+            <div className="relative flex overflow-x-hidden bg-content1">
+              <div
+                ref={servicesRef}
+                className="py-12 animate-marquee bg-background whitespace-nowrap flex"
+              >
+                {data.Services.concat(data.Services).map((service, index) => (
+                  <span
+                    key={index}
+                    className="mx-4 text-xl border px-2 border-content2 p-1 w-full rounded-full font-semibold text-foreground"
+                  >
+                    {service.text}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </CardBody>
+        </Card>
+      </FadeInSection>
+
+      <FadeInSection>
         <Card className="mb-12 bg-background">
-          <CardHeader>
-            <h2 className="text-2xl md:text-3xl font-bold">Projects</h2>
-          </CardHeader>
           <Divider />
           <CardBody>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Card>
-                <CardBody>
-                  <h3 className="text-lg font-semibold mb-2">Project 1</h3>
-                  <p>
-                    Description of Project 1. This is a brief overview of what the
-                    project entails and what technologies were used.
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {stats.map((stat, index) => (
+                <div key={index} className="text-center">
+                  <p className="text-4xl font-bold mb-2">
+                    {stat.number}
+                    <span className="text-primary">+</span>
                   </p>
-                </CardBody>
-              </Card>
-              <Card>
-                <CardBody>
-                  <h3 className="text-lg font-semibold mb-2">Project 2</h3>
-                  <p>
-                    Description of Project 2. This project showcases your skills
-                    in a different area or technology stack.
-                  </p>
-                </CardBody>
-              </Card>
+                  <p className="text-sm text-default-500">{stat.label}</p>
+                </div>
+              ))}
             </div>
           </CardBody>
         </Card>
@@ -96,13 +121,14 @@ export default function HomePage() {
           </CardHeader>
           <Divider />
           <CardBody>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              <div className="bg-content1 p-2 rounded">React</div>
-              <div className="bg-content1 p-2 rounded">Next.js</div>
-              <div className="bg-content1 p-2 rounded">TypeScript</div>
-              <div className="bg-content1 p-2 rounded">Tailwind CSS</div>
-              <div className="bg-content1 p-2 rounded">Node.js</div>
-              <div className="bg-content1 p-2 rounded">GraphQL</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {data.skills.map((skill, index) => (
+                <div key={index} className="bg-content1 p-4 rounded flex flex-col items-center text-center">
+                  {skill.icon}
+                  <h3 className="text-lg font-semibold mb-2">{skill.title}</h3>
+                  <p className="text-sm">{skill.description}</p>
+                </div>
+              ))}
             </div>
           </CardBody>
         </Card>
@@ -116,36 +142,15 @@ export default function HomePage() {
           <Divider />
           <CardBody>
             <div className="space-y-6">
-              <div>
-                <h3 className="text-lg font-semibold">Senior Web Developer</h3>
-                <p className="text-small text-default-500">
-                  TechCorp Inc. | 2020 - Present
-                </p>
-                <ul className="list-disc list-inside mt-2">
-                  <li>
-                    Led development of multiple high-traffic web applications
-                  </li>
-                  <li>Mentored junior developers and conducted code reviews</li>
-                  <li>
-                    Implemented CI/CD pipelines to improve deployment efficiency
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold">Full Stack Developer</h3>
-                <p className="text-small text-default-500">
-                  WebSolutions LLC | 2017 - 2020
-                </p>
-                <ul className="list-disc list-inside mt-2">
-                  <li>Developed and maintained various client websites</li>
-                  <li>
-                    Collaborated with design team to implement responsive layouts
-                  </li>
-                  <li>
-                    Optimized database queries to improve application performance
-                  </li>
-                </ul>
-              </div>
+              {data.resume.experiences.map((exp, index) => (
+                <div key={index}>
+                  <h3 className="text-lg font-semibold">{exp.role}</h3>
+                  <p className="text-small text-default-500">
+                    {exp.company} | {exp.duration}
+                  </p>
+                  <p className="mt-2">{exp.description}</p>
+                </div>
+              ))}
             </div>
           </CardBody>
         </Card>

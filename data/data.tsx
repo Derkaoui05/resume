@@ -1,4 +1,4 @@
-import { Home, Info, Briefcase, Mail } from "lucide-react"; // Import icons from lucide-react
+import { Home, Info, Briefcase, Mail, Code, Layout, Server, Smartphone, Database, TestTube, Cloud } from "lucide-react"; // Import icons from lucide-react
 
 interface Project {
     id: number;
@@ -29,7 +29,7 @@ interface Experience {
 }
 
 interface Skills {
-    icon: string,
+    icon: JSX.Element,
     title: string,
     description: string,
 }
@@ -46,6 +46,9 @@ interface ContactLink {
     url: string;
     icon: string;
 }
+interface Services{
+    text : string,
+}
 
 export const data = {
     personalInfo: {
@@ -54,6 +57,34 @@ export const data = {
         bio: "Passionate about web development, working with Next.js and React.",
         location: "Morocco",
     } as PersonalInfo,
+
+    Services: [
+        {
+            text : "Web Development",
+        },
+        {
+            text : "UI/UX Design",
+        },
+        {
+            text : "Mobile App Development",
+        },
+        {
+            text : "API Integration",
+        },
+        {
+            text : "E-commerce Solutions",
+        },
+        {
+            text : "Performance Optimization",
+        },
+        {
+            text : "SEO",
+        },
+        {
+            text : "Cloud Services",
+        },
+    ] as Services[],
+
 
     NavLink: [
         {
@@ -84,37 +115,37 @@ export const data = {
     
     skills: [
         {
-            icon: "",
+            icon: <Code className="w-6 h-6 mb-2" />,
             title: "Programming Languages",
-            description: "I'm well-versed in a variety of programming languages, including JavaScript, TypeScript, Python, and I'm currently exploring Rust.",
+            description: "I'm well-versed in a variety of programming languages, including /JavaScript, TypeScript, Python, and I'm currently exploring Rust.",
         },
         {
-            icon: "",
+            icon: <Layout className="w-6 h-6 mb-2" />,
             title: "Frontend",
             description: "My expertise in frontend development spans across a range of frameworks and technologies, such as React, Vue, Vuex, JavaScript, TypeScript, Next.js, Nuxt.js, and Gatsby.js. I'm committed to creating seamless user experiences.",
         },
         {
-            icon: "",
+            icon: <Server className="w-6 h-6 mb-2" />,
             title: "Backend",
             description: "I have a strong foundation in backend development, with proficiency in Node.js, Express.js, Koa.js, Laravel, Core PHP, and hands-on experience with Django.",
         },
         {
-            icon: "",
+            icon: <Smartphone className="w-6 h-6 mb-2" />,
             title: "Mobile",
             description: "My skills extend to mobile development, particularly in React Native and Android app development using Kotlin.",
         },
         {
-            icon: "",
+            icon: <Database className="w-6 h-6 mb-2" />,
             title: "Databases",
-            description: "'m well-versed in working with databases like Mariadb, MySQL, MongoDB, PostgreSQL, Redis, and Sqlite, enabling me to build robust and efficient data-driven applications.",
+            description: "I'm well-versed in working with databases like Mariadb, MySQL, MongoDB, PostgreSQL, Redis, and Sqlite, enabling me to build robust and efficient data-driven applications.",
         },
         {
-            icon: "",
+            icon: <TestTube className="w-6 h-6 mb-2" />,
             title: "Testing Tools",
             description: "I use a range of testing tools, including Jest for testing React applications, Vue Test Utils for testing Vue.js applications, Mocha for Node.js backend testing, and Chai for Node.js backend testing, to ensure the reliability of the software I develop.",
         },
         {
-            icon: "",
+            icon: <Cloud className="w-6 h-6 mb-2" />,
             title: "DevOps and Microservices",
             description: "I have experience with DevOps practices, including Docker and Docker Compose, and I specialize in building microservices with Node.js. I also have familiarity with message queuing systems like RabbitMQ.",
         },
@@ -142,9 +173,14 @@ export const data = {
     resume: {
         education: [
             {
+                degree: "bachelor's degree in physics",
+                school: "Ocean Atlantic",
+                year: "2022",
+            },
+            {
                 degree: "Specialized Technician in Software Development",
                 school: "IFIAG",
-                year: "2022",
+                year: "2024",
             },
         ] as Education[],
         experiences: [
