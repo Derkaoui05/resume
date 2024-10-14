@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { data } from "@/data/data";
 import { Image } from "@nextui-org/image";
 import { Button } from "@nextui-org/button";
@@ -9,16 +9,18 @@ import { Divider } from "@nextui-org/divider";
 import { User } from "@nextui-org/user";
 import { AnimatedDot } from "@/components/ui/AnimatedDot";
 import { FadeInSection } from "@/components/ui/ScrollAnimation";
+import Footer from "@/components/Footer";
 
 export default function HomePage() {
   const servicesRef = useRef<HTMLDivElement>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const servicesList = servicesRef.current;
     if (servicesList) {
       servicesList.style.animation = "none";
       // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      servicesList.offsetHeight; // Assign to avoid the warning
+      servicesList.offsetHeight;
       servicesList.style.animation = "";
     }
   }, []);
@@ -74,7 +76,7 @@ export default function HomePage() {
       </FadeInSection>
 
       <FadeInSection>
-        <Card className=" bg-background overflow-hidden">
+        <Card className="bg-background overflow-hidden">
           <Divider />
           <CardBody className="p-0">
             <div className="relative flex overflow-x-hidden bg-content1">
@@ -97,7 +99,7 @@ export default function HomePage() {
       </FadeInSection>
 
       <FadeInSection>
-        <Card className="mb-12 bg-background">
+        <Card className="my-12 bg-background">
           <Divider />
           <CardBody>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -116,46 +118,39 @@ export default function HomePage() {
       </FadeInSection>
 
       <FadeInSection>
-        <Card className="mb-12 bg-background">
-          <CardHeader>
-            <h2 className="text-2xl md:text-3xl font-bold">Skills</h2>
-          </CardHeader>
-          <Divider />
-          <CardBody>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {data.skills.map((skill, index) => (
-                <div key={index} className="bg-content1 p-4 rounded flex flex-col items-center text-center">
-                  {skill.icon}
-                  <h3 className="text-lg font-semibold mb-2">{skill.title}</h3>
-                  <p className="text-sm">{skill.description}</p>
-                </div>
-              ))}
-            </div>
-          </CardBody>
-        </Card>
+        <div className="relative">
+          <Card className="mb-12 cursor-pointer bg-background">
+            <CardHeader>
+              <h2 className="text-2xl md:text-3xl font-bold">Skills</h2>
+            </CardHeader>
+            <Divider />
+            <CardBody>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 relative">
+                {data.skills.map((skill, index) => (
+                  <div
+                    key={index}
+                    className="relative flex items-center justify-center w-full p-4 rounded-lg overflow-hidden transition-all duration-300 ease-in-out group"
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                  >
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-r from-default-50 to-content1 transform transition-transform duration-500 ease-in-out ${
+                        hoveredIndex === index ? "translate-x-0" : "translate-x-[-100%]"
+                      }`}
+                    />
+                    <div className="relative z-10 flex flex-col items-start">
+                      {skill.icon}
+                      <h3 className="text-lg font-semibold mb-2">{skill.title}</h3>
+                      <p className="text-sm">{skill.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardBody>
+          </Card>
+        </div>
       </FadeInSection>
-
-      <FadeInSection>
-        <Card className="bg-background">
-          <CardHeader>
-            <h2 className="text-2xl md:text-3xl font-bold">Experience</h2>
-          </CardHeader>
-          <Divider />
-          <CardBody>
-            <div className="space-y-6">
-              {data.resume.experiences.map((exp, index) => (
-                <div key={index}>
-                  <h3 className="text-lg font-semibold">{exp.role}</h3>
-                  <p className="text-small text-default-500">
-                    {exp.company} | {exp.duration}
-                  </p>
-                  <p className="mt-2">{exp.description}</p>
-                </div>
-              ))}
-            </div>
-          </CardBody>
-        </Card>
-      </FadeInSection>
+      <Footer />
     </div>
   );
 }

@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { NextUIProvider } from "@nextui-org/react";
 import Header from "@/components/Header";
-import { Footer } from "@/components/Footer";
+import { RightSideBar } from "@/components/RightSideBar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,7 +37,7 @@ export default function RootLayout({
             <main className="flex-1 mx-auto md:mx-0 w-full max-w-screen-sm md:max-w-none px-4 md:px-8">
               {children}
             </main>
-            <Footer />
+            <RightSideBar />
           </div>
         </NextUIProvider>
       </body>
